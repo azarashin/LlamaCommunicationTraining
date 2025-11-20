@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class AnimationController : MonoBehaviour
@@ -113,5 +114,27 @@ public class AnimationController : MonoBehaviour
         }
     }
 
-
+    internal void SetFaceType(int faceType)
+    {
+        switch(faceType)
+        {
+            case 0:
+                _currentEmotion = Emotion.Neutral;
+                break;
+            case 1:
+                _currentEmotion = Emotion.Happy;
+                break;
+            case 2:
+                _currentEmotion = Emotion.Sad;
+                break;
+            case 3:
+                _currentEmotion = Emotion.Angry;
+                break;
+            case 4:
+                _currentEmotion = Emotion.Surprised;
+                break;
+            default:
+                break;
+        }
+    }
 }

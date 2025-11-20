@@ -1,4 +1,4 @@
-using llama_communication_training.network;
+ï»¿using llama_communication_training.network;
 using llama_communication_training.network.payload;
 using UnityEngine;
 
@@ -6,6 +6,9 @@ namespace llama_communication_training.ui
 {
     public class MessageInput : MonoBehaviour
     {
+        [SerializeField]
+        GameManager _gameManager;
+
         [SerializeField]
         Transmitter _transmitter;
 
@@ -26,7 +29,7 @@ namespace llama_communication_training.ui
 
         public void OnSendMessage(string message)
         {
-            _messageBox.StartTyping("Ž©•ª", 0, message);
+            _messageBox.StartTyping("è‡ªåˆ†", 0, message, -1);
             StartCoroutine(_transmitter.CoSendPlayerMessage(new network.payload.RequestSendPlayerMessage
             {
                 message = message
@@ -34,10 +37,18 @@ namespace llama_communication_training.ui
             {
                 if (success)
                 {
-                    string talkerName = "‘ŠŽè";
+                    string talkerName = "ç›¸æ‰‹";
                     int talkerIndex = 1; 
+                    
                     Debug.Log($"[Response] {JsonUtility.ToJson(response)}");
-                    _messageBox.StartTyping(talkerName, talkerIndex, response.message);
+                    _messageBox.StartTyping(talkerName, talkerIndex, response.message, response.face_type, () =>
+                    {
+                        _gameManager.AddScore(response.score);
+                        if(response.end)
+                        {
+                            _gameManager.FinishGame();
+                        }
+                    });
 
                 }
                 else

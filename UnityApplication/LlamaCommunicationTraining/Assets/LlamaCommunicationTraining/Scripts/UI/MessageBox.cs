@@ -1,4 +1,4 @@
-using Codice.Client.BaseCommands.BranchExplorer;
+ï»¿using Codice.Client.BaseCommands.BranchExplorer;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,6 +15,8 @@ namespace llama_communication_training.ui
         public string TalkerName;
         public int NamePlateIndex;
         public string Message;
+        public int FaceType; 
+        public Action Notify;
     }
     public class MessageBox : MonoBehaviour
     {
@@ -37,7 +39,10 @@ namespace llama_communication_training.ui
         float _intervalForEachMessage = 2.0f; 
 
         [SerializeField]
-        GameObject _nextIcon; 
+        GameObject _nextIcon;
+
+        [SerializeField]
+        AnimationController _animationController;
 
         private Coroutine _typingCoroutine;
         private List<MessageReserve> _messageQueue = new List<MessageReserve>();
@@ -47,17 +52,19 @@ namespace llama_communication_training.ui
             _typingCoroutine = StartCoroutine(TypeText());
 
 
-            StartTyping("•û", 0, "‚±‚ê‚ÍƒeƒXƒg‚Å‚·B‚±‚ê‚ÍƒeƒXƒg‚Å‚·B‚±‚ê‚ÍƒeƒXƒg‚Å‚·B");
-            StartTyping("‚¾‚ê‚©", 1, "‚±‚ê‚Í‚±‚ê‚Í‚±‚ê‚Í‚±‚ê‚Í‚±‚ê‚Í‚±‚ê‚Í‚±‚ê‚Í‚±‚ê‚Í‚±‚ê‚Í‚±‚ê‚Í");
+            StartTyping("ç·’æ–¹", 0, "ã“ã‚Œã¯ãƒ†ã‚¹ãƒˆã§ã™ã€‚ã“ã‚Œã¯ãƒ†ã‚¹ãƒˆã§ã™ã€‚ã“ã‚Œã¯ãƒ†ã‚¹ãƒˆã§ã™ã€‚", -1);
+            StartTyping("ã ã‚Œã‹", 1, "ã“ã‚Œã¯ã“ã‚Œã¯ã“ã‚Œã¯ã“ã‚Œã¯ã“ã‚Œã¯ã“ã‚Œã¯ã“ã‚Œã¯ã“ã‚Œã¯ã“ã‚Œã¯ã“ã‚Œã¯", 1);
         }
 
-        public void StartTyping(string talkerName, int index, string message)
+        public void StartTyping(string talkerName, int index, string message, int faceType, Action notify = null)
         {
             _messageQueue.Add(new MessageReserve
             {
                 TalkerName = talkerName,
                 NamePlateIndex = index,
-                Message = message
+                Message = message,
+                FaceType = faceType, 
+                Notify = notify
             });
         }
 
@@ -73,6 +80,7 @@ namespace llama_communication_training.ui
                 MessageReserve nextMessage = _messageQueue[0];
                 _messageQueue.RemoveAt(0);
 
+                _animationController.SetFaceType(nextMessage.FaceType); 
                 string message = nextMessage.Message;
                 _nameLabel.text = nextMessage.TalkerName;
                 int index = nextMessage.NamePlateIndex;
@@ -100,6 +108,7 @@ namespace llama_communication_training.ui
                 }
                 _nextIcon.SetActive(true);
                 yield return new WaitForSeconds(_intervalForEachMessage);
+                nextMessage.Notify?.Invoke();
 
             }
 
