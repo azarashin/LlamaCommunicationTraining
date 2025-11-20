@@ -23,10 +23,12 @@ namespace llama_communication_training.network
         
         }
 
+        public IEnumerator CoReset(RequestReset requestData, Action<bool, ResponseReset> notify)
+        {
+            string endPoint = $"{_setting.ServerURL}/reset";
+            yield return CoSendData(endPoint, requestData, notify);
+        }
 
-        /// <summary>
-        /// メッセージを送信して応答を受け取る
-        /// </summary>
         public IEnumerator CoSendPlayerMessage(RequestSendPlayerMessage requestData, Action<bool, ResponseSendPlayerMessage> notify)
         {
             string endPoint = $"{_setting.ServerURL}/send_message";

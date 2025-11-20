@@ -19,6 +19,12 @@ class ResponseSendPlayerMessage(BaseModel):
     score: int
     end: bool
 
+class RequestReset(BaseModel):
+    pass
+
+class ResponseReset(BaseModel):
+    result: bool
+
 # ------------------------------------------------------------
 # FastAPI アプリ作成
 # ------------------------------------------------------------
@@ -39,6 +45,15 @@ app.add_middleware(
 # ------------------------------------------------------------
 # Unity の Transmitter から呼ばれるエンドポイント
 # ------------------------------------------------------------
+
+
+@app.post("/reset", response_model=ResponseReset)
+async def reset(req: RequestReset):
+
+    global count
+    count = 0
+
+    return ResponseReset(result=True)
 
 @app.post("/send_message", response_model=ResponseSendPlayerMessage)
 async def send_message(req: RequestSendPlayerMessage):
