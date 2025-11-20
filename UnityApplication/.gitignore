@@ -1,0 +1,28 @@
+# Unityによって生成されるファイル
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+# Visual StudioやJetBrains Riderによる自動生成ファイル
+vscode/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+# OSによる一時ファイル
+DS_Store
+Thumbs.db
+# Unity Cloud Build関連
+/[Uu]ser[Bb]uilds/
+# アドレス可能なアセット関連の一時ファイル
+[Aa]ssets/StreamingAssets/aa*
+[Aa]ssets/AddressableAssetsData/*.bin*
