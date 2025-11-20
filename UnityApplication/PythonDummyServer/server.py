@@ -25,6 +25,8 @@ class ResponseSendPlayerMessage(BaseModel):
 
 app = FastAPI()
 
+count: int = 0
+
 # Unity からのアクセスを許可（必要なら）
 app.add_middleware(
     CORSMiddleware,
@@ -43,12 +45,17 @@ async def send_message(req: RequestSendPlayerMessage):
     print("▼ Received from Unity:")
     print(req.json())
 
+    global count
+    count += 1
+
+    max_message: int = 3
+
     # ダミーのレスポンス生成
     response = ResponseSendPlayerMessage(
         message="サーバからのダミー返信です！",
         face_type=1,
         score=10,
-        end=False
+        end=(count >= max_message)
     )
 
     return response
