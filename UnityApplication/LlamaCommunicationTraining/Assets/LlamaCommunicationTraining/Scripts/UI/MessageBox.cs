@@ -1,10 +1,8 @@
-﻿using Codice.Client.BaseCommands.BranchExplorer;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using TMPro;
-using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -44,16 +42,19 @@ namespace llama_communication_training.ui
         [SerializeField]
         AnimationController _animationController;
 
+        [SerializeField]
+        AudioSource _seKeyTypeMyself;
+
+        [SerializeField]
+        AudioSource _seKeyTypeYou;
+
+
         private Coroutine _typingCoroutine;
         private List<MessageReserve> _messageQueue = new List<MessageReserve>();
 
         private void Start()
         {
             _typingCoroutine = StartCoroutine(TypeText());
-
-
-            StartTyping("緒方", 0, "これはテストです。これはテストです。これはテストです。", -1);
-            StartTyping("だれか", 1, "これはこれはこれはこれはこれはこれはこれはこれはこれはこれは", 1);
         }
 
         public void StartTyping(string talkerName, int index, string message, int faceType, Action notify = null)
@@ -101,48 +102,70 @@ namespace llama_communication_training.ui
 
                 int totalLength = message.Length;
 
-                string pr_a = "あかさたなはまやらわアカサタナハマヤラワがざだばぱガザダババa";
-                string pr_i = "いきしちにひみりイキシチニヒミリぎじぢびぴギジヂビピi";
-                string pr_u = "うくすつぬふむゆるウクスツヌフムユルぐずづぶぷグズヅブプu";
-                string pr_e = "えけせてねへめれエケセテネヘメレげぜでべぺゲゼデベペe";
-                string pr_o = "おこそとのほもろをオコソトノホモロヲごぞどぼぽゴゾドポボo";
-
                 for (int i = 0; i <= totalLength; i++)
                 {
                     _message.maxVisibleCharacters = i;
-                    string ch = "-";
-                    if (i < message.Length)
+                    if(IsOtherMessage(nextMessage))
                     {
-                        ch = message.Substring(i, 1);
+                        UpdateMouce(i, message);
+                        _seKeyTypeYou.Play();
                     }
-                    if(pr_a.IndexOf(ch) >= 0)
+                    else
                     {
-                        _animationController.SetPronounce("a");
-                    }
-                    if (pr_i.IndexOf(ch) >= 0)
-                    {
-                        _animationController.SetPronounce("i");
-                    }
-                    if (pr_u.IndexOf(ch) >= 0)
-                    {
-                        _animationController.SetPronounce("u");
-                    }
-                    if (pr_e.IndexOf(ch) >= 0)
-                    {
-                        _animationController.SetPronounce("e");
-                    }
-                    if (pr_o.IndexOf(ch) >= 0)
-                    {
-                        _animationController.SetPronounce("o");
+                        _seKeyTypeMyself.Play();
                     }
                     yield return new WaitForSeconds(_secondsPerCharacter);
                 }
+                if (IsOtherMessage(nextMessage))
+                {
+                    _animationController.SetPronounce("-");
+                }
                 _nextIcon.SetActive(true);
-                yield return new WaitForSeconds(_intervalForEachMessage);
                 nextMessage.Notify?.Invoke();
+                yield return new WaitForSeconds(_intervalForEachMessage);
 
             }
 
+        }
+
+        private bool IsOtherMessage(MessageReserve message)
+        {
+            return (message.NamePlateIndex > 0);
+        }
+
+        private void UpdateMouce(int index, string message)
+        {
+            string pr_a = "あかさたなはまやらわアカサタナハマヤラワがざだばぱガザダババa";
+            string pr_i = "いきしちにひみりイキシチニヒミリぎじぢびぴギジヂビピi";
+            string pr_u = "うくすつぬふむゆるウクスツヌフムユルぐずづぶぷグズヅブプu";
+            string pr_e = "えけせてねへめれエケセテネヘメレげぜでべぺゲゼデベペe";
+            string pr_o = "おこそとのほもろをオコソトノホモロヲごぞどぼぽゴゾドポボo";
+
+            string ch = "-";
+            if (index < message.Length)
+            {
+                ch = message.Substring(index, 1);
+            }
+            if (pr_a.IndexOf(ch) >= 0)
+            {
+                _animationController.SetPronounce("a");
+            }
+            if (pr_i.IndexOf(ch) >= 0)
+            {
+                _animationController.SetPronounce("i");
+            }
+            if (pr_u.IndexOf(ch) >= 0)
+            {
+                _animationController.SetPronounce("u");
+            }
+            if (pr_e.IndexOf(ch) >= 0)
+            {
+                _animationController.SetPronounce("e");
+            }
+            if (pr_o.IndexOf(ch) >= 0)
+            {
+                _animationController.SetPronounce("o");
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ using llama_communication_training.network;
 using llama_communication_training.network.payload;
 using llama_communication_training.ui;
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace llama_communication_training
@@ -17,6 +18,9 @@ namespace llama_communication_training
 
         [SerializeField]
         ResultPanel _resultPanel;
+
+        [SerializeField]
+        MessageInput _messageInput;
 
         private int _score = 0; 
 
@@ -34,6 +38,7 @@ namespace llama_communication_training
             StartCoroutine(_transmitter.CoReset(new network.payload.RequestReset { }, (bool ret, ResponseReset res) =>
             {
                 Debug.Log($"Reset result: {ret}, {JsonUtility.ToJson(res)}");
+                _messageInput.ReceiveFirstMessage(res.first_message, res.face_type);
             }));
         }
 
@@ -50,8 +55,14 @@ namespace llama_communication_training
 
         internal void FinishGame()
         {
+            StartCoroutine(CoFinishGame());
+        }
+
+        private IEnumerator CoFinishGame()
+        {
+            yield return new WaitForSeconds(2.0f);
+            _resultPanel.gameObject.SetActive(true);
             _resultPanel.Setup(_score);
-            _resultPanel.gameObject.SetActive(true); 
         }
     }
 }

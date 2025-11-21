@@ -24,6 +24,8 @@ class RequestReset(BaseModel):
 
 class ResponseReset(BaseModel):
     result: bool
+    face_type: int
+    first_message: str
 
 # ------------------------------------------------------------
 # FastAPI アプリ作成
@@ -53,7 +55,7 @@ async def reset(req: RequestReset):
     global count
     count = 0
 
-    return ResponseReset(result=True)
+    return ResponseReset(result=True, first_message = "本日は晴天ですか？")
 
 @app.post("/send_message", response_model=ResponseSendPlayerMessage)
 async def send_message(req: RequestSendPlayerMessage):

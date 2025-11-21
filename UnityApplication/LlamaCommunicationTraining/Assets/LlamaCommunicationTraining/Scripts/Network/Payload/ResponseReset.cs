@@ -7,5 +7,7 @@ namespace llama_communication_training.network.payload
     public class ResponseReset
     {
         public bool result;
+        public string first_message;
+        public int face_type; 
     }
 }
