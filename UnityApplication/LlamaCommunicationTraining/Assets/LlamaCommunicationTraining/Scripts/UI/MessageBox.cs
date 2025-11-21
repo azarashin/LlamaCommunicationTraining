@@ -123,8 +123,8 @@ namespace llama_communication_training.ui
                     _animationController.SetPronounce("-");
                 }
                 _nextIcon.SetActive(true);
-                yield return new WaitForSeconds(_intervalForEachMessage);
                 nextMessage.Notify?.Invoke();
+                yield return new WaitForSeconds(_intervalForEachMessage);
 
             }
 
