@@ -101,41 +101,18 @@ namespace llama_communication_training.ui
 
                 int totalLength = message.Length;
 
-                string pr_a = "あかさたなはまやらわアカサタナハマヤラワがざだばぱガザダババa";
-                string pr_i = "いきしちにひみりイキシチニヒミリぎじぢびぴギジヂビピi";
-                string pr_u = "うくすつぬふむゆるウクスツヌフムユルぐずづぶぷグズヅブプu";
-                string pr_e = "えけせてねへめれエケセテネヘメレげぜでべぺゲゼデベペe";
-                string pr_o = "おこそとのほもろをオコソトノホモロヲごぞどぼぽゴゾドポボo";
-
                 for (int i = 0; i <= totalLength; i++)
                 {
                     _message.maxVisibleCharacters = i;
-                    string ch = "-";
-                    if (i < message.Length)
+                    if(IsOtherMessage(nextMessage))
                     {
-                        ch = message.Substring(i, 1);
-                    }
-                    if(pr_a.IndexOf(ch) >= 0)
-                    {
-                        _animationController.SetPronounce("a");
-                    }
-                    if (pr_i.IndexOf(ch) >= 0)
-                    {
-                        _animationController.SetPronounce("i");
-                    }
-                    if (pr_u.IndexOf(ch) >= 0)
-                    {
-                        _animationController.SetPronounce("u");
-                    }
-                    if (pr_e.IndexOf(ch) >= 0)
-                    {
-                        _animationController.SetPronounce("e");
-                    }
-                    if (pr_o.IndexOf(ch) >= 0)
-                    {
-                        _animationController.SetPronounce("o");
+                        UpdateMouce(i, message);
                     }
                     yield return new WaitForSeconds(_secondsPerCharacter);
+                }
+                if (IsOtherMessage(nextMessage))
+                {
+                    _animationController.SetPronounce("-");
                 }
                 _nextIcon.SetActive(true);
                 yield return new WaitForSeconds(_intervalForEachMessage);
@@ -143,6 +120,46 @@ namespace llama_communication_training.ui
 
             }
 
+        }
+
+        private bool IsOtherMessage(MessageReserve message)
+        {
+            return (message.NamePlateIndex > 0);
+        }
+
+        private void UpdateMouce(int index, string message)
+        {
+            string pr_a = "あかさたなはまやらわアカサタナハマヤラワがざだばぱガザダババa";
+            string pr_i = "いきしちにひみりイキシチニヒミリぎじぢびぴギジヂビピi";
+            string pr_u = "うくすつぬふむゆるウクスツヌフムユルぐずづぶぷグズヅブプu";
+            string pr_e = "えけせてねへめれエケセテネヘメレげぜでべぺゲゼデベペe";
+            string pr_o = "おこそとのほもろをオコソトノホモロヲごぞどぼぽゴゾドポボo";
+
+            string ch = "-";
+            if (index < message.Length)
+            {
+                ch = message.Substring(index, 1);
+            }
+            if (pr_a.IndexOf(ch) >= 0)
+            {
+                _animationController.SetPronounce("a");
+            }
+            if (pr_i.IndexOf(ch) >= 0)
+            {
+                _animationController.SetPronounce("i");
+            }
+            if (pr_u.IndexOf(ch) >= 0)
+            {
+                _animationController.SetPronounce("u");
+            }
+            if (pr_e.IndexOf(ch) >= 0)
+            {
+                _animationController.SetPronounce("e");
+            }
+            if (pr_o.IndexOf(ch) >= 0)
+            {
+                _animationController.SetPronounce("o");
+            }
         }
     }
 }
