@@ -119,7 +119,14 @@ namespace llama_communication_training.ui
                         _seKeyTypeMyself.Play();
                     }
                     _scroll.normalizedPosition = new Vector2(0.0f, 0.0f);
-                    yield return new WaitForSeconds(_secondsPerCharacter);
+                    if (Input.GetKey(KeyCode.Space))
+                    {
+                        yield return new WaitForSeconds(_secondsPerCharacter * 0.01f);
+                    }
+                    else
+                    {
+                        yield return new WaitForSeconds(_secondsPerCharacter);
+                    }
                 }
                 if (IsOtherMessage(nextMessage))
                 {

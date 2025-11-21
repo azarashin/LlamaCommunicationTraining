@@ -970,7 +970,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 73ca54fc6efb92842b000333882bd224, type: 3}
   - {fileID: 21300000, guid: e9b3c0af571c4054b83d6f077940c510, type: 3}
   - {fileID: 21300000, guid: 5bd11d789f8ba584390999a2f7b34d56, type: 3}
-  _secondsPerCharacter: 0.0015
+  _secondsPerCharacter: 0.15
   _intervalForEachMessage: 2
   _nextIcon: {fileID: 648197152}
   _animationController: {fileID: 2068296123}
@@ -2742,7 +2742,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u6700\u521D\u306E\u30E1\u30C3\u30BB\u30FC\u30B8"
+  m_text: "\n\u3053\u3093\u306B\u3061\u306F\uFF01\u4ECA\u65E5\u306F\u3069\u3093\u306A\u304A\u8A71\u3092\u3057\u307E\u3057\u3087\u3046\uFF1F"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bc07e5a5573b21b4dacca2abda43f450, type: 2}
   m_sharedMaterial: {fileID: -6883972914840845497, guid: bc07e5a5573b21b4dacca2abda43f450, type: 2}
