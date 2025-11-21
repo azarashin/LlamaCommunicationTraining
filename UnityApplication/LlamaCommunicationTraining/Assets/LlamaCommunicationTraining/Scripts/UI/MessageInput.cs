@@ -38,6 +38,11 @@ namespace llama_communication_training.ui
 
         public void OnSendMessage(string message)
         {
+            if(string.IsNullOrEmpty(message))
+            {
+                return; 
+            }
+
             _uiBody.alpha = 0.5f;
             _uiBody.interactable = false;
             _inputField.text = ""; 
