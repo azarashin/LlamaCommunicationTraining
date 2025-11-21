@@ -4,6 +4,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
+import prompts
 
 import ollama
 from typing import List, Dict
@@ -201,7 +202,7 @@ async def reset(req: RequestReset):
     count_store[user_id] = 0
     chat_history_store[user_id] = []
 
-    return ResponseReset(result=True, first_message = "最初のメッセージ", face_type = 0)
+    return ResponseReset(result=True, first_message = prompts.prompt_init, face_type = 0)
 
 
 @app.post("/send_message", response_model=ResponseSendPlayerMessage)
