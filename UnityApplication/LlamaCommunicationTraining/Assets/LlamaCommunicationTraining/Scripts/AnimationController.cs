@@ -71,6 +71,11 @@ public class AnimationController : MonoBehaviour
         }
     }
 
+    public void SetPronounce(string pronounce)
+    {
+        _pronouce = pronounce;
+    }
+
     private void UpdateMouce()
     { 
         if(string.IsNullOrEmpty(_pronouce))

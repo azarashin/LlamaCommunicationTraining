@@ -756,7 +756,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 73ca54fc6efb92842b000333882bd224, type: 3}
   - {fileID: 21300000, guid: e9b3c0af571c4054b83d6f077940c510, type: 3}
   - {fileID: 21300000, guid: 5bd11d789f8ba584390999a2f7b34d56, type: 3}
-  _secondsPerCharacter: 0.05
+  _secondsPerCharacter: 0.2
   _intervalForEachMessage: 2
   _nextIcon: {fileID: 648197152}
   _animationController: {fileID: 2068296123}
@@ -1333,7 +1333,6 @@ MonoBehaviour:
   _gameManager: {fileID: 867593118}
   _transmitter: {fileID: 867593117}
   _messageBox: {fileID: 498102791}
-  _animationController: {fileID: 2068296123}
 --- !u!1 &1074038404
 GameObject:
   m_ObjectHideFlags: 0

@@ -101,9 +101,40 @@ namespace llama_communication_training.ui
 
                 int totalLength = message.Length;
 
+                string pr_a = "あかさたなはまやらわアカサタナハマヤラワがざだばぱガザダババa";
+                string pr_i = "いきしちにひみりイキシチニヒミリぎじぢびぴギジヂビピi";
+                string pr_u = "うくすつぬふむゆるウクスツヌフムユルぐずづぶぷグズヅブプu";
+                string pr_e = "えけせてねへめれエケセテネヘメレげぜでべぺゲゼデベペe";
+                string pr_o = "おこそとのほもろをオコソトノホモロヲごぞどぼぽゴゾドポボo";
+
                 for (int i = 0; i <= totalLength; i++)
                 {
                     _message.maxVisibleCharacters = i;
+                    string ch = "-";
+                    if (i < message.Length)
+                    {
+                        ch = message.Substring(i, 1);
+                    }
+                    if(pr_a.IndexOf(ch) >= 0)
+                    {
+                        _animationController.SetPronounce("a");
+                    }
+                    if (pr_i.IndexOf(ch) >= 0)
+                    {
+                        _animationController.SetPronounce("i");
+                    }
+                    if (pr_u.IndexOf(ch) >= 0)
+                    {
+                        _animationController.SetPronounce("u");
+                    }
+                    if (pr_e.IndexOf(ch) >= 0)
+                    {
+                        _animationController.SetPronounce("e");
+                    }
+                    if (pr_o.IndexOf(ch) >= 0)
+                    {
+                        _animationController.SetPronounce("o");
+                    }
                     yield return new WaitForSeconds(_secondsPerCharacter);
                 }
                 _nextIcon.SetActive(true);
