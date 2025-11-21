@@ -4,6 +4,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
+import prompts
 
 import ollama
 from typing import List, Dict
@@ -39,6 +40,8 @@ class RequestReset(BaseModel):
 
 class ResponseReset(BaseModel):
     result: bool
+    face_type: int
+    first_message: str
 
 
 # ------------------------------------------------------------
@@ -62,7 +65,7 @@ app.add_middleware(
 chat_history_store: Dict[str, List[Dict[str, str]]] = {}
 count_store: Dict[str, int] = {}  # user_idごとの回数カウント
 
-MODEL_NAME = "llama3.2"
+MODEL_NAME = "hf.co/mmnga/Llama-3.1-Swallow-8B-Instruct-v0.5-gguf:latest"
 
 
 # ------------------------------------------------------------
@@ -199,7 +202,7 @@ async def reset(req: RequestReset):
     count_store[user_id] = 0
     chat_history_store[user_id] = []
 
-    return ResponseReset(result=True)
+    return ResponseReset(result=True, first_message = prompts.prompt_init, face_type = 0)
 
 
 @app.post("/send_message", response_model=ResponseSendPlayerMessage)
