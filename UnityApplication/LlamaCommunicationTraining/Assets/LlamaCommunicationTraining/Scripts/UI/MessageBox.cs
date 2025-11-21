@@ -48,6 +48,9 @@ namespace llama_communication_training.ui
         [SerializeField]
         AudioSource _seKeyTypeYou;
 
+        [SerializeField]
+        ScrollRect _scroll; 
+
 
         private Coroutine _typingCoroutine;
         private List<MessageReserve> _messageQueue = new List<MessageReserve>();
@@ -104,8 +107,9 @@ namespace llama_communication_training.ui
 
                 for (int i = 0; i <= totalLength; i++)
                 {
+                    _message.text = message.Substring(0, i);
                     _message.maxVisibleCharacters = i;
-                    if(IsOtherMessage(nextMessage))
+                    if (IsOtherMessage(nextMessage))
                     {
                         UpdateMouce(i, message);
                         _seKeyTypeYou.Play();
@@ -114,6 +118,7 @@ namespace llama_communication_training.ui
                     {
                         _seKeyTypeMyself.Play();
                     }
+                    _scroll.normalizedPosition = new Vector2(0.0f, 0.0f);
                     yield return new WaitForSeconds(_secondsPerCharacter);
                 }
                 if (IsOtherMessage(nextMessage))
