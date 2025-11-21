@@ -1,6 +1,8 @@
 ﻿using llama_communication_training.network;
 using llama_communication_training.network.payload;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace llama_communication_training.ui
 {
@@ -14,6 +16,12 @@ namespace llama_communication_training.ui
 
         [SerializeField]
         MessageBox _messageBox;
+
+        [SerializeField]
+        CanvasGroup _uiBody;
+
+        [SerializeField]
+        TMP_InputField _inputField;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
@@ -29,6 +37,9 @@ namespace llama_communication_training.ui
 
         public void OnSendMessage(string message)
         {
+            _uiBody.alpha = 0.5f;
+            _uiBody.interactable = false;
+            _inputField.text = ""; 
             _messageBox.StartTyping("自分", 0, message, -1);
             StartCoroutine(_transmitter.CoSendPlayerMessage(new network.payload.RequestSendPlayerMessage
             {
@@ -48,8 +59,12 @@ namespace llama_communication_training.ui
                         {
                             _gameManager.FinishGame();
                         }
+                        else
+                        {
+                            _uiBody.alpha = 1.0f;
+                            _uiBody.interactable = true;
+                        }
                     });
-
                 }
                 else
                 {
