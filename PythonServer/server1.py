@@ -39,6 +39,8 @@ class RequestReset(BaseModel):
 
 class ResponseReset(BaseModel):
     result: bool
+    face_type: int
+    first_message: str
 
 
 # ------------------------------------------------------------
@@ -199,7 +201,7 @@ async def reset(req: RequestReset):
     count_store[user_id] = 0
     chat_history_store[user_id] = []
 
-    return ResponseReset(result=True)
+    return ResponseReset(result=True, first_message = "最初のメッセージ", face_type = 0)
 
 
 @app.post("/send_message", response_model=ResponseSendPlayerMessage)
