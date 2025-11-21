@@ -1,10 +1,8 @@
-﻿using Codice.Client.BaseCommands.BranchExplorer;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using TMPro;
-using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
 
