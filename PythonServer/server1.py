@@ -64,7 +64,7 @@ app.add_middleware(
 chat_history_store: Dict[str, List[Dict[str, str]]] = {}
 count_store: Dict[str, int] = {}  # user_idごとの回数カウント
 
-MODEL_NAME = "llama3.2"
+MODEL_NAME = "hf.co/mmnga/Llama-3.1-Swallow-8B-Instruct-v0.5-gguf:latest"
 
 
 # ------------------------------------------------------------
