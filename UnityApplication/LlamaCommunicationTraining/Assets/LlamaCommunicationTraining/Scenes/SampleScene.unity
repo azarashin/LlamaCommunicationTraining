@@ -603,8 +603,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -758,7 +758,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 73ca54fc6efb92842b000333882bd224, type: 3}
   - {fileID: 21300000, guid: e9b3c0af571c4054b83d6f077940c510, type: 3}
   - {fileID: 21300000, guid: 5bd11d789f8ba584390999a2f7b34d56, type: 3}
-  _secondsPerCharacter: 0.1
+  _secondsPerCharacter: 0.15
   _intervalForEachMessage: 2
   _nextIcon: {fileID: 648197152}
   _animationController: {fileID: 2068296123}
@@ -1494,7 +1494,7 @@ MonoBehaviour:
   m_HideSoftKeyboard: 0
   m_CharacterValidation: 0
   m_RegexValue: 
-  m_GlobalPointSize: 14
+  m_GlobalPointSize: 28
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
@@ -2462,8 +2462,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 192.76282, y: -254.1836}
-  m_SizeDelta: {x: 385.5256, y: 508.3672}
+  m_AnchoredPosition: {x: 350.46814, y: -157.22937}
+  m_SizeDelta: {x: 700.9362, y: 314.4587}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1831053362
 MonoBehaviour:
@@ -2608,8 +2608,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
