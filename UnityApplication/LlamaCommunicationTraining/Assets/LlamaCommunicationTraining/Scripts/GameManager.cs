@@ -3,6 +3,7 @@ using llama_communication_training.network;
 using llama_communication_training.network.payload;
 using llama_communication_training.ui;
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace llama_communication_training
@@ -54,8 +55,14 @@ namespace llama_communication_training
 
         internal void FinishGame()
         {
+            StartCoroutine(CoFinishGame());
+        }
+
+        private IEnumerator CoFinishGame()
+        {
+            yield return new WaitForSeconds(2.0f);
+            _resultPanel.gameObject.SetActive(true);
             _resultPanel.Setup(_score);
-            _resultPanel.gameObject.SetActive(true); 
         }
     }
 }
