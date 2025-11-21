@@ -44,6 +44,13 @@ namespace llama_communication_training.ui
         [SerializeField]
         AnimationController _animationController;
 
+        [SerializeField]
+        AudioSource _seKeyTypeMyself;
+
+        [SerializeField]
+        AudioSource _seKeyTypeYou;
+
+
         private Coroutine _typingCoroutine;
         private List<MessageReserve> _messageQueue = new List<MessageReserve>();
 
@@ -107,6 +114,11 @@ namespace llama_communication_training.ui
                     if(IsOtherMessage(nextMessage))
                     {
                         UpdateMouce(i, message);
+                        _seKeyTypeYou.Play();
+                    }
+                    else
+                    {
+                        _seKeyTypeMyself.Play();
                     }
                     yield return new WaitForSeconds(_secondsPerCharacter);
                 }
