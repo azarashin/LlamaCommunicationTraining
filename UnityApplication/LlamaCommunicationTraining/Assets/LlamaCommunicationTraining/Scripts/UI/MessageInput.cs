@@ -1,5 +1,6 @@
 ﻿using llama_communication_training.network;
 using llama_communication_training.network.payload;
+using System.Security.Cryptography;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -63,6 +64,7 @@ namespace llama_communication_training.ui
                         {
                             _uiBody.alpha = 1.0f;
                             _uiBody.interactable = true;
+                            _inputField.Select();
                         }
                     });
                 }
@@ -71,6 +73,22 @@ namespace llama_communication_training.ui
                     Debug.LogError("Failed to send message.");
                 }
             }));
+        }
+
+        public void ReceiveFirstMessage(string message, int face_type)
+        {
+            _uiBody.alpha = 0.5f;
+            _uiBody.interactable = false;
+            _inputField.text = "";
+
+            string talkerName = "相手";
+            int talkerIndex = 1;
+            _messageBox.StartTyping(talkerName, talkerIndex, message, face_type, () =>
+            {
+                _uiBody.alpha = 1.0f;
+                _uiBody.interactable = true;
+                _inputField.Select();
+            });
         }
     }
 }

@@ -18,6 +18,9 @@ namespace llama_communication_training
         [SerializeField]
         ResultPanel _resultPanel;
 
+        [SerializeField]
+        MessageInput _messageInput;
+
         private int _score = 0; 
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -34,6 +37,7 @@ namespace llama_communication_training
             StartCoroutine(_transmitter.CoReset(new network.payload.RequestReset { }, (bool ret, ResponseReset res) =>
             {
                 Debug.Log($"Reset result: {ret}, {JsonUtility.ToJson(res)}");
+                _messageInput.ReceiveFirstMessage(res.first_message, res.face_type);
             }));
         }
 

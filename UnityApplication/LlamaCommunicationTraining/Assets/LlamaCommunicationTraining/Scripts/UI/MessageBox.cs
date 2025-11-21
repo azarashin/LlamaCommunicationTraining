@@ -57,10 +57,6 @@ namespace llama_communication_training.ui
         private void Start()
         {
             _typingCoroutine = StartCoroutine(TypeText());
-
-
-            StartTyping("緒方", 0, "これはテストです。これはテストです。これはテストです。", -1);
-            StartTyping("だれか", 1, "これはこれはこれはこれはこれはこれはこれはこれはこれはこれは", 1);
         }
 
         public void StartTyping(string talkerName, int index, string message, int faceType, Action notify = null)
